@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   guacd:
     image: guacamole/guacd:1.5.5
@@ -6,7 +7,7 @@ services:
     restart: unless-stopped
     networks:
       - guacnet
-      
+
   db:
     image: mariadb:10.9
     container_name: guacdb
@@ -18,10 +19,10 @@ services:
       MYSQL_PASSWORD: "123456"
     volumes:
       - db_data:/var/lib/mysql
-      - ./init:/docker-entrypoint-initdb.d
+      - ./init:/docker-entrypoint-initdb.d  # ✅ otomatik tablo oluşturma
     networks:
       - guacnet
-      
+
   guacamole:
     image: guacamole/guacamole:1.5.5
     container_name: guacamole
@@ -33,18 +34,16 @@ services:
       GUACD_HOSTNAME: guacd
       MYSQL_HOSTNAME: db
       MYSQL_DATABASE: guacamole_db
-      MYSQL_USER: emre
+      MYSQL_USER: "emre"
       MYSQL_PASSWORD: "123456"
       WEBAPP_CONTEXT: "ROOT"
-    # ⚠️ Portu kaldırdık - artık sadece Nginx üzerinden erişilecek
     expose:
       - "8080"
     volumes:
-      - /home/guacamole:/etc/guacamole
+      - ./guacamole-home:/etc/guacamole  # ✅ yerel klasöre kaydet, /home yerine
     networks:
       - guacnet
-      
-  # 🆕 Nginx Reverse Proxy - CORS sorununu çözmek için
+
   nginx:
     image: nginx:alpine
     container_name: guacamole-nginx
@@ -52,15 +51,15 @@ services:
     depends_on:
       - guacamole
     ports:
-      - "8080:80"  # Dışarıya 8080 portunu açıyoruz
+      - "8080:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
       - guacnet
-      
+
 networks:
   guacnet:
     driver: bridge
-    
+
 volumes:
   db_data:
