@@ -1,86 +1,73 @@
-\# 🐳 Guacamole Docker Setup (CORS destekli)
+````{"variant":"standard","title":"Kullanıcı Dostu Guacamole Docker Kurulum Rehberi","id":"63628"}
+# 🐳 Guacamole Docker Setup (CORS Destekli)
 
+Bu proje, **Apache Guacamole**'u **Nginx reverse proxy** üzerinden **CORS desteğiyle** kolayca çalıştırmanızı sağlar.  
+Docker kullanarak sadece **tek komutla** kurulabilir ve hemen tarayıcı üzerinden erişilebilir.
 
+---
 
-Bu proje, Apache Guacamole'u Nginx reverse proxy üzerinden CORS destekli olarak çalıştırmak için hazırlanmıştır.
+## 🚀 Kurulum Adımları
 
+1. **Proje dosyalarını indirin:**
+   ```bash
+   git clone https://github.com/kullanici/guacamole-docker-setup.git
+   cd guacamole-docker-setup
+   ```
 
+2. **Docker Desktop’un çalıştığından emin olun.**  
+   (Windows veya macOS kullanıyorsanız Docker Desktop açık olmalı.)
 
-\## 🚀 Kurulum
+3. **Tüm servisleri başlatın:**
+   ```bash
+   docker compose up -d
+   ```
 
+   Bu komut otomatik olarak aşağıdaki bileşenleri başlatır:
+   - `guacd` → Guacamole bağlantı servisi  
+   - `db` → MariaDB veritabanı  
+   - `guacamole` → Guacamole web uygulaması  
+   - `nginx` → CORS destekli reverse proxy
 
+4. **Kurulum tamamlandıktan sonra tarayıcınızı açın ve şu adrese gidin:**
+   ```
+   http://localhost:8080
+   ```
 
-1\. Bu repoyu klonlayın:
+5. **Varsayılan giriş bilgileriyle oturum açın:**
+   ```
+   Kullanıcı adı: guacadmin
+   Şifre: guacadmin
+   ```
 
-&nbsp;  ```bash
+   🔐 **Not:** İlk girişten sonra bu bilgileri değiştirmeniz önerilir.
 
-&nbsp;  git clone https://github.com/kullanici/guacamole-docker-setup.git
+---
 
-&nbsp;  cd guacamole-docker-setup
-
-&nbsp;  ```
-
-
-
-2\. Docker Desktop’un açık olduğundan emin olun.
-
-
-
-3\. Container’ları başlatın:
-
-&nbsp;  ```bash
-
-&nbsp;  docker compose up -d
-
-&nbsp;  ```
-
-
-
-4\. Kurulum tamamlandıktan sonra tarayıcınızdan aşağıdaki adrese gidin:
-
-&nbsp;  ```
-
-&nbsp;  http://localhost:8080
-
-&nbsp;  ```
-
-
-
-5\. Varsayılan giriş bilgileri:
-
-&nbsp;  ```
-
-&nbsp;  Kullanıcı adı: guacadmin
-
-&nbsp;  Şifre: guacadmin
-
-&nbsp;  ```
-
-
-
-\## ⚙️ Yardımcı Komutlar
-
-
+## ⚙️ Faydalı Komutlar
 
 Container’ların durumunu görmek için:
-
 ```bash
-
 docker ps
-
 ```
 
-
-
-Container’ları durdurmak için:
-
+Tüm container’ları durdurmak için:
 ```bash
-
 docker compose down
-
 ```
 
+Logları görüntülemek için:
+```bash
+docker logs guacamole --tail 50
+```
+
+---
+
+## 💡 Ek Bilgiler
+
+- Proje **CORS sorunlarını otomatik olarak çözecek** şekilde yapılandırılmıştır.  
+- **Nginx reverse proxy** üzerinden erişim sağlandığı için Guacamole’un kendi portunu dışa açmanız gerekmez.  
+- Tüm veritabanı verileri `db_data` adlı volume’da saklanır — böylece yeniden başlatmalarda veriler korunur.
+
+---
+✨ Artık Guacamole’unuzu çalıştırmaya hazırsınız!
 ````
-
-
-
