@@ -18,5 +18,6 @@ Bu proje, Apache Guacamole'u Nginx reverse proxy üzerinden CORS destekli olarak
 
 &nbsp;  cd guacamole-docker-setup
 
-
+2\. Containerları ayağa kaldırın:
+&nbsp; docker compose up -d
 
