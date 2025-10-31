@@ -18,7 +18,69 @@ Bu proje, Apache Guacamole'u Nginx reverse proxy üzerinden CORS destekli olarak
 
 &nbsp;  cd guacamole-docker-setup
 
-2\. Containerları ayağa kaldırın:
-&nbsp; 
-docker compose up -d
+&nbsp;  ```
+
+
+
+2\. Docker Desktop’un açık olduğundan emin olun.
+
+
+
+3\. Container’ları başlatın:
+
+&nbsp;  ```bash
+
+&nbsp;  docker compose up -d
+
+&nbsp;  ```
+
+
+
+4\. Kurulum tamamlandıktan sonra tarayıcınızdan aşağıdaki adrese gidin:
+
+&nbsp;  ```
+
+&nbsp;  http://localhost:8080
+
+&nbsp;  ```
+
+
+
+5\. Varsayılan giriş bilgileri:
+
+&nbsp;  ```
+
+&nbsp;  Kullanıcı adı: guacadmin
+
+&nbsp;  Şifre: guacadmin
+
+&nbsp;  ```
+
+
+
+\## ⚙️ Yardımcı Komutlar
+
+
+
+Container’ların durumunu görmek için:
+
+```bash
+
+docker ps
+
+```
+
+
+
+Container’ları durdurmak için:
+
+```bash
+
+docker compose down
+
+```
+
+````
+
+
 
